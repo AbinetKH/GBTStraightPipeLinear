@@ -1,0 +1,64 @@
+\hypertarget{ik__tensor_8h_source}{}\doxysection{ik\+\_\+tensor.\+h}
+\label{ik__tensor_8h_source}\index{GBT\_straight\_pipe\_linear/ik\_tensor.h@{GBT\_straight\_pipe\_linear/ik\_tensor.h}}
+\mbox{\hyperlink{ik__tensor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mode__coupling__ik_8h}{mode\_coupling\_ik.h}}"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{class }\mbox{\hyperlink{classcoupling_tensors}{couplingTensors}} \{}
+\DoxyCodeLine{6 \textcolor{keyword}{private}:}
+\DoxyCodeLine{7     \textcolor{keywordtype}{int} count = 0, LM\_k1, LM\_k2;}
+\DoxyCodeLine{8     \textcolor{keywordtype}{double} Cik, Bik, Dik, muDik\_1, muDik\_2;}
+\DoxyCodeLine{9     std::string k1, k2;}
+\DoxyCodeLine{10     Eigen::MatrixXd ik\_tensor;}
+\DoxyCodeLine{11     \mbox{\hyperlink{class_gbt_linear_mode_coupling}{GbtLinearModeCoupling}} obCoupling;}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     Eigen::MatrixXd \mbox{\hyperlink{classcoupling_tensors_a5dfecbf2cf86c67ee901b696fb1c8af7}{ikTensor}}(std::vector<std::string> mode\_list, Eigen::VectorXd LM\_element, \textcolor{keywordtype}{int} length\_mode\_list, \textcolor{keywordtype}{double} mu, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} Q, \textcolor{keywordtype}{double} K, \textcolor{keywordtype}{double} G) \{}
+\DoxyCodeLine{14         \textcolor{comment}{/*}}
+\DoxyCodeLine{15 \textcolor{comment}{        * determines the second -\/ order coupling tensor based on GbtLinearModeCoupling class}}
+\DoxyCodeLine{16 \textcolor{comment}{        */} }
+\DoxyCodeLine{17         ik\_tensor.setZero(1, 15);}
+\DoxyCodeLine{18 \textcolor{comment}{//\#pragma omp parallel for }}
+\DoxyCodeLine{19         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < length\_mode\_list; i++) \{}
+\DoxyCodeLine{20             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < length\_mode\_list; j++) \{}
+\DoxyCodeLine{21                 \textcolor{comment}{//std::cout << "{}modes all   "{} << mode\_list[j] << std::endl;}}
+\DoxyCodeLine{22                 k1 = mode\_list[i];}
+\DoxyCodeLine{23                 k2 = mode\_list[j];}
+\DoxyCodeLine{24                 \textcolor{keywordflow}{if} (k1[0] == k2[0]) \{}
+\DoxyCodeLine{25                    \textcolor{comment}{// std::cout << "{}coupled modes   "{} << k1.size()  << k2.substr(k2.size() -\/ 1,k2.size()) << std::endl;}}
+\DoxyCodeLine{26                     Cik = obCoupling.\mbox{\hyperlink{class_gbt_linear_mode_coupling_a9e0f486e5f13634a98d9472f881f8b0e}{ikCStraightPipe}}(k1, k2, t, r, Q, K, G);}
+\DoxyCodeLine{27                     Bik = obCoupling.\mbox{\hyperlink{class_gbt_linear_mode_coupling_af031a100ee0aba4e823884566973a396}{ikBStraightPipe}}(k1, k2, t, r, Q, K, G);}
+\DoxyCodeLine{28                     Dik = obCoupling.\mbox{\hyperlink{class_gbt_linear_mode_coupling_acbb9191d40fa38f7d96fec7368175693}{ikDStraightPipe}}(k1, k2, t, r, Q, K, G);}
+\DoxyCodeLine{29                     muDik\_1 = mu * obCoupling.\mbox{\hyperlink{class_gbt_linear_mode_coupling_ae514f0ac9be7ecc6ff495bd74acf763f}{ikDmu1StraightPipe}}(k1, k2, t, r, Q, K, G);}
+\DoxyCodeLine{30                     muDik\_2 = mu * obCoupling.\mbox{\hyperlink{class_gbt_linear_mode_coupling_a88dadecb3721197206c2de3671ab1e9f}{ikDmu2StraightPipe}}(k1, k2, t, r, Q, K, G);}
+\DoxyCodeLine{31                     \textcolor{keywordflow}{if} (k1 == \textcolor{stringliteral}{"{}1|1"{}}) \{}
+\DoxyCodeLine{32                         ik\_tensor(count, 0) = 1;}
+\DoxyCodeLine{33                     \}}
+\DoxyCodeLine{34                     \textcolor{keywordflow}{if} (k2 == \textcolor{stringliteral}{"{}1|1"{}}) \{}
+\DoxyCodeLine{35                         ik\_tensor(count, 1) = 1;}
+\DoxyCodeLine{36                     \}}
+\DoxyCodeLine{37                     ik\_tensor(count, 2) = Cik;}
+\DoxyCodeLine{38                     ik\_tensor(count, 3) = Bik;}
+\DoxyCodeLine{39                     ik\_tensor(count, 4) = Dik;}
+\DoxyCodeLine{40                     ik\_tensor(count, 5) = muDik\_1;}
+\DoxyCodeLine{41                     ik\_tensor(count, 6) = muDik\_2;}
+\DoxyCodeLine{42                     LM\_k1 = i * 4;}
+\DoxyCodeLine{43                     LM\_k2 = j * 4;}
+\DoxyCodeLine{44                     \textcolor{comment}{// std::cout << "{}LM\_element  "{} << LM\_element(Eigen::seq(LM\_k1, LM\_k1 + 3), 0) << std::endl;}}
+\DoxyCodeLine{45                     ik\_tensor(count, Eigen::seq(7, 10)) = LM\_element(Eigen::seq(LM\_k1, LM\_k1 + 3), 0);}
+\DoxyCodeLine{46                     ik\_tensor(count, Eigen::seq(11, 14)) = LM\_element(Eigen::seq(LM\_k2, LM\_k2 + 3), 0);}
+\DoxyCodeLine{47                     ik\_tensor.conservativeResize(ik\_tensor.rows() + 1, Eigen::NoChange);}
+\DoxyCodeLine{48                     ik\_tensor(count + 1, Eigen::all) = 0 * ik\_tensor(count, Eigen::all);}
+\DoxyCodeLine{49                     count++; \textcolor{comment}{//task to do: make count independent for parallization}}
+\DoxyCodeLine{50                 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52             \}}
+\DoxyCodeLine{53         \}}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} ik\_tensor;}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 }
+
+\end{DoxyCode}

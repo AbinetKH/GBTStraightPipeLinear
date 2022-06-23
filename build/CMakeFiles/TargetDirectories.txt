@@ -1,0 +1,3 @@
+C:/Users/dine1308/source/repos/GBTLinearPipe/build/CMakeFiles/GBTStraightPipeLinear.dir
+C:/Users/dine1308/source/repos/GBTLinearPipe/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/dine1308/source/repos/GBTLinearPipe/build/CMakeFiles/ZERO_CHECK.dir

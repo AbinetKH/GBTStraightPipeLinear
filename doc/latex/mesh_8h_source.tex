@@ -1,0 +1,30 @@
+\hypertarget{mesh_8h_source}{}\doxysection{mesh.\+h}
+\label{mesh_8h_source}\index{GBT\_straight\_pipe\_linear/mesh.h@{GBT\_straight\_pipe\_linear/mesh.h}}
+\mbox{\hyperlink{mesh_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <Eigen/Dense>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_rectangular_mesh}{RectangularMesh}} \{}
+\DoxyCodeLine{7 \textcolor{keyword}{private}:}
+\DoxyCodeLine{8     Eigen::VectorXd r\_d, w, r\_d\_cos, r\_d\_sin;}
+\DoxyCodeLine{9     Eigen::MatrixXd rr, cc;}
+\DoxyCodeLine{10     \textcolor{keywordtype}{double}  pi = 3.14159;}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_rectangular_mesh_a4b67252f137d274aa83dadbd150f567e}{meshStraightPipe}}(\textcolor{keywordtype}{int} cross\_sect\_ref, \textcolor{keywordtype}{int} no\_beam\_elem, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} length, Eigen::MatrixXd* y, Eigen::MatrixXd* z, Eigen::MatrixXd* x)\{}
+\DoxyCodeLine{13         r\_d.setLinSpaced(cross\_sect\_ref, 0, 2 * pi);}
+\DoxyCodeLine{14         w.setLinSpaced(no\_beam\_elem+1, 0, length);}
+\DoxyCodeLine{15         rr.setOnes(no\_beam\_elem+1, 1);}
+\DoxyCodeLine{16         cc.setOnes(cross\_sect\_ref, 1);}
+\DoxyCodeLine{17         r\_d\_cos = r\_d.array().cos() * r;}
+\DoxyCodeLine{18         r\_d\_sin = r\_d.array().sin() * r;}
+\DoxyCodeLine{19         *y = rr * r\_d\_cos.transpose();}
+\DoxyCodeLine{20         *z = rr * r\_d\_sin.transpose();}
+\DoxyCodeLine{21         *x = w * cc.transpose();}
+\DoxyCodeLine{22     \};}
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 }
+
+\end{DoxyCode}

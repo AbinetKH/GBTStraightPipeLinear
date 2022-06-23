@@ -1,0 +1,58 @@
+\hypertarget{_l_m__connectivity__matrix_8h_source}{}\doxysection{LM\+\_\+connectivity\+\_\+matrix.\+h}
+\label{_l_m__connectivity__matrix_8h_source}\index{GBT\_straight\_pipe\_linear/LM\_connectivity\_matrix.h@{GBT\_straight\_pipe\_linear/LM\_connectivity\_matrix.h}}
+\mbox{\hyperlink{_l_m__connectivity__matrix_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <Eigen/Dense>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_lm_connectivity_matrix}{LmConnectivityMatrix}} \{}
+\DoxyCodeLine{7 \textcolor{keyword}{private}:}
+\DoxyCodeLine{8     \textcolor{keywordtype}{int} length\_mode\_list, sum\_b=0,sum\_c,sum\_tax,sum\_high,sum\_a;}
+\DoxyCodeLine{9     Eigen::MatrixXd LM\_matrix;}
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     Eigen::MatrixXd \mbox{\hyperlink{class_lm_connectivity_matrix_af861f9464cbbb1e163a79865186dcc08}{openEndPipe}}(std::vector<std::string> mode\_list, \textcolor{keywordtype}{int} no\_beam\_elem) \{}
+\DoxyCodeLine{12         \textcolor{comment}{/*}}
+\DoxyCodeLine{13 \textcolor{comment}{        * determines the LM connectivity matrix for assembly of the global stiffness matrix}}
+\DoxyCodeLine{14 \textcolor{comment}{        * refer Finite Element Procedures K. J. Bathe}}
+\DoxyCodeLine{15 \textcolor{comment}{        * code needs improvement}}
+\DoxyCodeLine{16 \textcolor{comment}{        */}}
+\DoxyCodeLine{17         length\_mode\_list = std::size(mode\_list);}
+\DoxyCodeLine{18         LM\_matrix.setZero(length\_mode\_list*4, no\_beam\_elem);}
+\DoxyCodeLine{19         }
+\DoxyCodeLine{20         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < no\_beam\_elem; i++)\{}
+\DoxyCodeLine{21             sum\_c = 0, sum\_tax=0, sum\_high=0;}
+\DoxyCodeLine{22             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < length\_mode\_list; k++) \{}
+\DoxyCodeLine{23                 sum\_a = 0;}
+\DoxyCodeLine{24                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < 4; j++) \{}
+\DoxyCodeLine{25                     \textcolor{comment}{//std::cout << "{}mode\_listlm "{} << mode\_list[k] << std::endl;}}
+\DoxyCodeLine{26                     \textcolor{keywordflow}{if} (mode\_list[k] == \textcolor{stringliteral}{"{}1|1"{}}) \{}
+\DoxyCodeLine{27                         LM\_matrix(j + sum\_c, i) = i + sum\_a + sum\_tax + sum\_b + sum\_high * (2 + no\_beam\_elem * 2);}
+\DoxyCodeLine{28                         sum\_a++;}
+\DoxyCodeLine{29                     \}}
+\DoxyCodeLine{30                     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{31                         LM\_matrix(j + sum\_c, i) = sum\_high * (2 + no\_beam\_elem * 2) + sum\_a + sum\_b + sum\_tax;}
+\DoxyCodeLine{32                         sum\_a++;}
+\DoxyCodeLine{33                     \}}
+\DoxyCodeLine{34                 \}}
+\DoxyCodeLine{35                 \textcolor{keywordflow}{if} (mode\_list[k] == \textcolor{stringliteral}{"{}1|1"{}}) \{}
+\DoxyCodeLine{36                     sum\_tax +=((no\_beam\_elem * 4) -\/ (no\_beam\_elem -\/ 1));}
+\DoxyCodeLine{37                  \}}
+\DoxyCodeLine{38                 \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{39                     sum\_high++ ;}
+\DoxyCodeLine{40                 \}}
+\DoxyCodeLine{41                 sum\_c += 4;}
+\DoxyCodeLine{42             \}}
+\DoxyCodeLine{43             sum\_b += 2;}
+\DoxyCodeLine{44         \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{keywordflow}{return} LM\_matrix;}
+\DoxyCodeLine{47     \};}
+\DoxyCodeLine{48     Eigen::MatrixXd \mbox{\hyperlink{class_lm_connectivity_matrix_ac72deebbd57afa6bbe47b604b0277db6}{closeEndPipe}}(std::vector<std::string> mode\_list, \textcolor{keywordtype}{int} no\_beam\_elem) \{}
+\DoxyCodeLine{49         \textcolor{comment}{// to be completed, for toroidal pipe}}
+\DoxyCodeLine{50         \textcolor{keywordflow}{return} LM\_matrix;}
+\DoxyCodeLine{51     \};}
+\DoxyCodeLine{52 \};}
+
+\end{DoxyCode}

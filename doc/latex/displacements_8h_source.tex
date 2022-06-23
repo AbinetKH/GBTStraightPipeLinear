@@ -1,0 +1,65 @@
+\hypertarget{displacements_8h_source}{}\doxysection{displacements.\+h}
+\label{displacements_8h_source}\index{GBT\_straight\_pipe\_linear/displacements.h@{GBT\_straight\_pipe\_linear/displacements.h}}
+\mbox{\hyperlink{displacements_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_g_b_t__function_8h}{GBT\_function.h}}"{}}}
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{classdisplacements}{displacements}} \{}
+\DoxyCodeLine{4 \textcolor{keyword}{private}:}
+\DoxyCodeLine{5     Eigen::MatrixXd loc\_u\_x, loc\_v\_y, loc\_w\_z, loc\_u\_X, loc\_v\_Y, loc\_w\_Z;}
+\DoxyCodeLine{6     Eigen::Matrix3d coordTrans, coordTrans\_num;}
+\DoxyCodeLine{7     Eigen::Vector3d local\_vec, global\_vec;}
+\DoxyCodeLine{8     std::string k, k\_mode;}
+\DoxyCodeLine{9     \textcolor{keywordtype}{int} length\_mode\_list, LM\_len, LM\_pos, LM\_pos1, LM\_pos2, LM\_pos3;}
+\DoxyCodeLine{10     \textcolor{keywordtype}{double} vertheta, sum\_u, sum\_v, sum\_w, gbt\_func\_u, gbt\_func\_v, gbt\_func\_w, varphi, pi = 3.14159, varphi\_add=0;}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     Eigen::MatrixXd \mbox{\hyperlink{classdisplacements_aa1928888d0a88df1ef033580c23516b4}{SphericalTransformationMatrix}}(\textcolor{keywordtype}{double} vertheta, \textcolor{keywordtype}{double} varphi) \{}
+\DoxyCodeLine{14         coordTrans << -\/sin(vertheta) * sin(varphi), cos(varphi), cos(vertheta)* sin(varphi),}
+\DoxyCodeLine{15             -\/sin(vertheta)* cos(varphi), -\/sin(varphi), cos(vertheta)* cos(varphi),}
+\DoxyCodeLine{16             cos(vertheta), 0, sin(vertheta);}
+\DoxyCodeLine{17         \textcolor{keywordflow}{return} coordTrans;}
+\DoxyCodeLine{18     }
+\DoxyCodeLine{19     \};}
+\DoxyCodeLine{20     \textcolor{keywordtype}{void}  \mbox{\hyperlink{classdisplacements_a399ea292720853d45c18aeb214dfa97f}{amplitude}}(std::vector<std::string> mode\_list, Eigen::MatrixXd V, Eigen::MatrixXd V\_x, \textcolor{keywordtype}{int} no\_of\_nodes, \textcolor{keywordtype}{int} cross\_sect\_ref, \textcolor{keywordtype}{double} r, Eigen::MatrixXd* u\_x, Eigen::MatrixXd* v\_y, Eigen::MatrixXd* w\_z, Eigen::MatrixXd* u\_X, Eigen::MatrixXd* v\_Y, Eigen::MatrixXd* w\_Z) \{}
+\DoxyCodeLine{21         length\_mode\_list = std::size(mode\_list) ;}
+\DoxyCodeLine{22         varphi = 0.1 / (no\_of\_nodes-\/1);}
+\DoxyCodeLine{23         loc\_u\_x.setZero(no\_of\_nodes, cross\_sect\_ref);}
+\DoxyCodeLine{24         loc\_v\_y.setZero(no\_of\_nodes, cross\_sect\_ref);}
+\DoxyCodeLine{25         loc\_w\_z.setZero(no\_of\_nodes, cross\_sect\_ref);}
+\DoxyCodeLine{26         loc\_u\_X.setZero(no\_of\_nodes, cross\_sect\_ref);}
+\DoxyCodeLine{27         loc\_v\_Y.setZero(no\_of\_nodes, cross\_sect\_ref);}
+\DoxyCodeLine{28         loc\_w\_Z.setZero(no\_of\_nodes, cross\_sect\_ref);}
+\DoxyCodeLine{29         \mbox{\hyperlink{class_gbt_function}{GbtFunction}} obGbtFunc;}
+\DoxyCodeLine{30         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < no\_of\_nodes; i++) \{}
+\DoxyCodeLine{31             vertheta = 0;}
+\DoxyCodeLine{32             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < cross\_sect\_ref; j++) \{}
+\DoxyCodeLine{33                 sum\_u = 0, sum\_v = 0, sum\_w = 0;}
+\DoxyCodeLine{34                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} m = 0; m < length\_mode\_list; m++) \{}
+\DoxyCodeLine{35                     k = mode\_list[m];}
+\DoxyCodeLine{36                    \textcolor{comment}{// k\_mode = k.substr(0, k.size() -\/ 2);}}
+\DoxyCodeLine{37                     gbt\_func\_u = obGbtFunc.\mbox{\hyperlink{class_gbt_function_ac5262166ac118cb76cd6dd9156d4b3d0}{deformationFuncU}}(k, r, vertheta);}
+\DoxyCodeLine{38                     gbt\_func\_v = obGbtFunc.\mbox{\hyperlink{class_gbt_function_aaf6d8fe44a3e4486cc909a1312341cc4}{deformationFuncV}}(k, r, vertheta);}
+\DoxyCodeLine{39                     gbt\_func\_w = obGbtFunc.\mbox{\hyperlink{class_gbt_function_acd07f50f7cebd19f4cd91a8c95182b8c}{deformationFuncW}}(k, r, vertheta);}
+\DoxyCodeLine{40                     sum\_u += V\_x(i, m) * gbt\_func\_u;}
+\DoxyCodeLine{41                     sum\_v += V(i, m) * gbt\_func\_v;}
+\DoxyCodeLine{42                     sum\_w += V(i, m) * gbt\_func\_w;}
+\DoxyCodeLine{43                 \}}
+\DoxyCodeLine{44                 loc\_u\_x(i, j) = sum\_u;}
+\DoxyCodeLine{45                 loc\_v\_y(i, j) = sum\_v;}
+\DoxyCodeLine{46                 loc\_w\_z(i, j) = sum\_w;}
+\DoxyCodeLine{47                 local\_vec << loc\_v\_y(i, j), loc\_u\_x(i, j), loc\_w\_z(i, j);}
+\DoxyCodeLine{48                 coordTrans\_num=\mbox{\hyperlink{classdisplacements_aa1928888d0a88df1ef033580c23516b4}{SphericalTransformationMatrix}}(vertheta, varphi\_add);}
+\DoxyCodeLine{49                 global\_vec = coordTrans\_num * local\_vec;}
+\DoxyCodeLine{50                 loc\_u\_X(i, j) = global\_vec(1);}
+\DoxyCodeLine{51                 loc\_v\_Y(i, j) = global\_vec(0);}
+\DoxyCodeLine{52                 loc\_w\_Z(i, j) = global\_vec(2);}
+\DoxyCodeLine{53                 vertheta += (2 * pi / (cross\_sect\_ref -\/ 1));}
+\DoxyCodeLine{54             \}}
+\DoxyCodeLine{55             varphi\_add += varphi;}
+\DoxyCodeLine{56         \}}
+\DoxyCodeLine{57         *u\_x = loc\_u\_x, * v\_y = loc\_v\_y, * w\_z = loc\_w\_z, * u\_X = loc\_u\_X, * v\_Y = loc\_v\_Y, * w\_Z = loc\_w\_Z;}
+\DoxyCodeLine{58     \};}
+\DoxyCodeLine{59 \};}
+
+\end{DoxyCode}

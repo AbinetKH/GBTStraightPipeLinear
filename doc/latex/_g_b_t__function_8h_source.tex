@@ -1,0 +1,216 @@
+\hypertarget{_g_b_t__function_8h_source}{}\doxysection{GBT\+\_\+function.\+h}
+\label{_g_b_t__function_8h_source}\index{GBT\_straight\_pipe\_linear/GBT\_function.h@{GBT\_straight\_pipe\_linear/GBT\_function.h}}
+\mbox{\hyperlink{_g_b_t__function_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{class_gbt_function}{GbtFunction}} \{}
+\DoxyCodeLine{4 \textcolor{keyword}{private}:}
+\DoxyCodeLine{5     \textcolor{keywordtype}{int} m, k\_int;}
+\DoxyCodeLine{6     std::string k\_type, k\_mode;}
+\DoxyCodeLine{7 \textcolor{keyword}{public}:}
+\DoxyCodeLine{8     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_ac5262166ac118cb76cd6dd9156d4b3d0}{deformationFuncU}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{12         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{13         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{16             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{17             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{18                 m = k\_int / 2;}
+\DoxyCodeLine{19             \}}
+\DoxyCodeLine{20             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{21                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{22             \}}
+\DoxyCodeLine{23         \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}}) \{}
+\DoxyCodeLine{26             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{27         \}}
+\DoxyCodeLine{28         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}1"{}} ) \{}
+\DoxyCodeLine{29             \textcolor{keywordflow}{return} 1.0;}
+\DoxyCodeLine{30         \}}
+\DoxyCodeLine{31         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}} )) \{}
+\DoxyCodeLine{32             \textcolor{keywordflow}{return} (r * sin(m * vertheta));}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}})) \{}
+\DoxyCodeLine{35             \textcolor{keywordflow}{return} (-\/r * cos(m * vertheta));}
+\DoxyCodeLine{36         \}}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{38     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_ab75d29a86c14ebf9f62c623c8d6eca11}{deformationFuncU1xdiff}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{42         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{43         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{46             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{47             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{48                 m = k\_int / 2;}
+\DoxyCodeLine{49             \}}
+\DoxyCodeLine{50             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{51                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{52             \}}
+\DoxyCodeLine{53         \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}} || k\_type == \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{56             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{57         \}}
+\DoxyCodeLine{58         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}})) \{}
+\DoxyCodeLine{59             \textcolor{keywordflow}{return} (r * m * cos(m * vertheta));}
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}})) \{}
+\DoxyCodeLine{62             \textcolor{keywordflow}{return} (-\/r * m * sin(m * vertheta));}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_aaf6d8fe44a3e4486cc909a1312341cc4}{deformationFuncV}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{69         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{70         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{73             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{74             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{75                 m = k\_int / 2;}
+\DoxyCodeLine{76             \}}
+\DoxyCodeLine{77             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{78                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{79             \}}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}t"{}} ) \{}
+\DoxyCodeLine{83             \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{84         \}}
+\DoxyCodeLine{85         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}1"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}}) \{}
+\DoxyCodeLine{86             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}})) \{}
+\DoxyCodeLine{89             \textcolor{keywordflow}{return} (-\/m * cos(m * vertheta));}
+\DoxyCodeLine{90         \}}
+\DoxyCodeLine{91         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}})) \{}
+\DoxyCodeLine{92             \textcolor{keywordflow}{return} (-\/m * sin(m * vertheta));}
+\DoxyCodeLine{93         \}}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_a41ede803949961a33c3c52e80c504466}{deformationFuncV1xdiff}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{99         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{100         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{103             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{104             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{105                 m = k\_int / 2;}
+\DoxyCodeLine{106             \}}
+\DoxyCodeLine{107             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{108                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{109             \}}
+\DoxyCodeLine{110         \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}} || k\_type == \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{113             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{114         \}}
+\DoxyCodeLine{115         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}})) \{}
+\DoxyCodeLine{116             \textcolor{keywordflow}{return} (pow(m, 2) * sin(m * vertheta));}
+\DoxyCodeLine{117         \}}
+\DoxyCodeLine{118         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& (k\_type == \textcolor{stringliteral}{"{}c"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}})) \{}
+\DoxyCodeLine{119             \textcolor{keywordflow}{return} (-\/pow(m, 2) * cos(m * vertheta));}
+\DoxyCodeLine{120         \}}
+\DoxyCodeLine{121     \}}
+\DoxyCodeLine{122     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_acd07f50f7cebd19f4cd91a8c95182b8c}{deformationFuncW}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{126         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{127         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{130             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{131             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{132                 m = k\_int / 2;}
+\DoxyCodeLine{133             \}}
+\DoxyCodeLine{134             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{135                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{136             \}}
+\DoxyCodeLine{137         \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}1"{}} || k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}}) \{}
+\DoxyCodeLine{141             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{142         \}}
+\DoxyCodeLine{143         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}a"{}}) \{}
+\DoxyCodeLine{144             \textcolor{keywordflow}{return} 1.0;}
+\DoxyCodeLine{145         \}}
+\DoxyCodeLine{146         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}} ) \{}
+\DoxyCodeLine{147             \textcolor{keywordflow}{return} (-\/pow(m, 2) * sin(m * vertheta));}
+\DoxyCodeLine{148         \}}
+\DoxyCodeLine{149         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}} ) \{}
+\DoxyCodeLine{150             \textcolor{keywordflow}{return} (pow(m, 2) * cos(m * vertheta)); }
+\DoxyCodeLine{151         \}}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_ace96544035dc0d066c2154598336324f}{deformationFuncW1xdiff}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{157         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{158         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{161             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{162             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{163                 m = k\_int / 2;}
+\DoxyCodeLine{164             \}}
+\DoxyCodeLine{165             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{166                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{167             \}}
+\DoxyCodeLine{168         \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}1"{}} || k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}}) \{}
+\DoxyCodeLine{171             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{172         \}}
+\DoxyCodeLine{173         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}}) \{}
+\DoxyCodeLine{174             \textcolor{keywordflow}{return} (-\/pow(m, 3) * cos(m * vertheta));}
+\DoxyCodeLine{175         \}}
+\DoxyCodeLine{176         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}}) \{}
+\DoxyCodeLine{177             \textcolor{keywordflow}{return} (-\/pow(m, 3) * sin(m * vertheta));}
+\DoxyCodeLine{178         \}}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_ab5400f458fa3f07d83b934f05e1a0855}{deformationFuncW2xdiff}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{184         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{185         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{188             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{189             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{190                 m = k\_int / 2;}
+\DoxyCodeLine{191             \}}
+\DoxyCodeLine{192             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{193                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{194             \}}
+\DoxyCodeLine{195         \}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}1"{}} || k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}}) \{}
+\DoxyCodeLine{198             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{199         \}}
+\DoxyCodeLine{200         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}}) \{}
+\DoxyCodeLine{201             \textcolor{keywordflow}{return} (pow(m, 4) * sin(m * vertheta));}
+\DoxyCodeLine{202         \}}
+\DoxyCodeLine{203         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}}) \{}
+\DoxyCodeLine{204             \textcolor{keywordflow}{return} (-\/pow(m, 4) * cos(m * vertheta));}
+\DoxyCodeLine{205         \}}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_function_ac6897e0b15086b405bd97a7716d7be26}{deformationFuncW3xdiff}}(std::string k, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} vertheta) \{}
+\DoxyCodeLine{211         k\_type = k.substr(k.size() -\/ 1, k.size());}
+\DoxyCodeLine{212         k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214         \textcolor{keywordflow}{if} (k\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{215             k\_int = std::stoi(k\_mode);}
+\DoxyCodeLine{216             \textcolor{keywordflow}{if} (k\_int \% 2 == 0) \{}
+\DoxyCodeLine{217                 m = k\_int / 2;}
+\DoxyCodeLine{218             \}}
+\DoxyCodeLine{219             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0) \{}
+\DoxyCodeLine{220                 m = (k\_int -\/ 1) / 2;}
+\DoxyCodeLine{221             \}}
+\DoxyCodeLine{222         \}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224         \textcolor{keywordflow}{if} (k\_type == \textcolor{stringliteral}{"{}1"{}} || k\_type == \textcolor{stringliteral}{"{}t"{}} || k\_type == \textcolor{stringliteral}{"{}u"{}} || k\_type == \textcolor{stringliteral}{"{}v"{}} || k\_type == \textcolor{stringliteral}{"{}a"{}}) \{}
+\DoxyCodeLine{225             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{226         \}}
+\DoxyCodeLine{227         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 == 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}}) \{}
+\DoxyCodeLine{228             \textcolor{keywordflow}{return} (pow(m, 5) * cos(m * vertheta));}
+\DoxyCodeLine{229         \}}
+\DoxyCodeLine{230         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k\_int \% 2 != 0 \&\& k\_type == \textcolor{stringliteral}{"{}c"{}}) \{}
+\DoxyCodeLine{231             \textcolor{keywordflow}{return} (pow(m, 5) * sin(m * vertheta));}
+\DoxyCodeLine{232         \}}
+\DoxyCodeLine{233     \}}
+\DoxyCodeLine{234 \};}
+
+\end{DoxyCode}

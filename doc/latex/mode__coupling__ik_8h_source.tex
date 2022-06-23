@@ -1,0 +1,176 @@
+\hypertarget{mode__coupling__ik_8h_source}{}\doxysection{mode\+\_\+coupling\+\_\+ik.\+h}
+\label{mode__coupling__ik_8h_source}\index{GBT\_straight\_pipe\_linear/mode\_coupling\_ik.h@{GBT\_straight\_pipe\_linear/mode\_coupling\_ik.h}}
+\mbox{\hyperlink{mode__coupling__ik_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{class_gbt_linear_mode_coupling}{GbtLinearModeCoupling}} \{}
+\DoxyCodeLine{4 \textcolor{keyword}{private}:}
+\DoxyCodeLine{5     \textcolor{keywordtype}{int} m, k1\_int, k2\_int;}
+\DoxyCodeLine{6     \textcolor{keywordtype}{double} M\_PI = 3.14159265358979323846;}
+\DoxyCodeLine{7     std::string k1\_type, k2\_type, k1\_mode, k2\_mode;}
+\DoxyCodeLine{8 \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_linear_mode_coupling_a9e0f486e5f13634a98d9472f881f8b0e}{ikCStraightPipe}}(std::string k1, std::string k2, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} Q, \textcolor{keywordtype}{double} K, \textcolor{keywordtype}{double} G) \{}
+\DoxyCodeLine{15         k1\_type = k1.substr(k1.size() -\/ 1, k1.size());}
+\DoxyCodeLine{16         k2\_type = k2.substr(k2.size() -\/ 1, k2.size());}
+\DoxyCodeLine{17         k1\_mode = k1.substr(0, k1.size() -\/ 2);}
+\DoxyCodeLine{18         k2\_mode = k2.substr(0, k2.size() -\/ 2);}
+\DoxyCodeLine{19         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{20             k1\_int = std::stoi(k1\_mode);}
+\DoxyCodeLine{21             \textcolor{keywordflow}{if} (k1\_int \% 2 == 0) \{}
+\DoxyCodeLine{22                 m = k1\_int / 2;}
+\DoxyCodeLine{23             \}}
+\DoxyCodeLine{24             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_int \% 2 != 0) \{}
+\DoxyCodeLine{25                 m = (k1\_int -\/ 1) / 2;}
+\DoxyCodeLine{26             \}}
+\DoxyCodeLine{27         \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{keywordflow}{if} (k1\_mode == \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{30             \textcolor{keywordflow}{return} K*2*M\_PI*r;}
+\DoxyCodeLine{31         \}}
+\DoxyCodeLine{32         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode == \textcolor{stringliteral}{"{}1"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{33             \textcolor{keywordflow}{return} Q * 2.0 * M\_PI * r;}
+\DoxyCodeLine{34         \}}
+\DoxyCodeLine{35         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{36             \textcolor{keywordflow}{return} (Q * M\_PI * pow(r,3)) +(K*M\_PI*r*pow(m,4));}
+\DoxyCodeLine{37         \}}
+\DoxyCodeLine{38         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}u"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}u"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{39             \textcolor{keywordflow}{return} (Q * M\_PI * pow(r, 3)) ;}
+\DoxyCodeLine{40         \}}
+\DoxyCodeLine{41         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type != \textcolor{stringliteral}{"{}v"{}} \&\& k2\_type != \textcolor{stringliteral}{"{}v"{}} \&\& k1\_mode == k2\_mode \&\& k1\_type != k2\_type) \{}
+\DoxyCodeLine{42             \textcolor{keywordflow}{return} Q * M\_PI * pow(r, 3);}
+\DoxyCodeLine{43         \}}
+\DoxyCodeLine{44         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{45             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{46         \}}
+\DoxyCodeLine{47     \};}
+\DoxyCodeLine{48     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_linear_mode_coupling_af031a100ee0aba4e823884566973a396}{ikBStraightPipe}}(std::string k1, std::string k2, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} Q, \textcolor{keywordtype}{double} K, \textcolor{keywordtype}{double} G) \{}
+\DoxyCodeLine{54         k1\_type = k1.substr(k1.size() -\/ 1, k1.size());}
+\DoxyCodeLine{55         k2\_type = k2.substr(k2.size() -\/ 1, k2.size());}
+\DoxyCodeLine{56         k1\_mode = k1.substr(0, k1.size() -\/ 2);}
+\DoxyCodeLine{57         k2\_mode = k2.substr(0, k2.size() -\/ 2);}
+\DoxyCodeLine{58         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{59             k1\_int = std::stoi(k1\_mode);}
+\DoxyCodeLine{60             \textcolor{keywordflow}{if} (k1\_int \% 2 == 0) \{}
+\DoxyCodeLine{61                 m = k1\_int / 2;}
+\DoxyCodeLine{62             \}}
+\DoxyCodeLine{63             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_int \% 2 != 0) \{}
+\DoxyCodeLine{64                 m = (k1\_int -\/ 1) / 2;}
+\DoxyCodeLine{65             \}}
+\DoxyCodeLine{66         \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordflow}{if} (k1\_mode == \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{69             \textcolor{keywordflow}{return} Q * 2.0 * M\_PI / r;}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{72             \textcolor{keywordflow}{return} (K * M\_PI * pow(m, 4)/pow(r,3))*pow((pow(m,2)-\/1),2);}
+\DoxyCodeLine{73         \}}
+\DoxyCodeLine{74         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{75             \textcolor{keywordflow}{return}  M\_PI * pow(m, 4)*( Q/r+K/ pow(r, 3));}
+\DoxyCodeLine{76         \}}
+\DoxyCodeLine{77         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type != \textcolor{stringliteral}{"{}u"{}} \&\& k2\_type != \textcolor{stringliteral}{"{}u"{}} \&\& k1\_mode == k2\_mode \&\& k1\_type != k2\_type) \{}
+\DoxyCodeLine{78             \textcolor{keywordflow}{return} (K * M\_PI * pow(m, 4) / pow(r, 3)) * (1-\/pow(m, 2));}
+\DoxyCodeLine{79         \}}
+\DoxyCodeLine{80         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{81             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{82         \}}
+\DoxyCodeLine{83     \};}
+\DoxyCodeLine{84     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_linear_mode_coupling_acbb9191d40fa38f7d96fec7368175693}{ikDStraightPipe}}(std::string k1, std::string k2, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} Q, \textcolor{keywordtype}{double} K, \textcolor{keywordtype}{double} G) \{}
+\DoxyCodeLine{90         k1\_type = k1.substr(k1.size() -\/ 1, k1.size());}
+\DoxyCodeLine{91         k2\_type = k2.substr(k2.size() -\/ 1, k2.size());}
+\DoxyCodeLine{92         k1\_mode = k1.substr(0, k1.size() -\/ 2);}
+\DoxyCodeLine{93         k2\_mode = k2.substr(0, k2.size() -\/ 2);}
+\DoxyCodeLine{94         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{95             k1\_int = std::stoi(k1\_mode);}
+\DoxyCodeLine{96             \textcolor{keywordflow}{if} (k1\_int \% 2 == 0) \{}
+\DoxyCodeLine{97                 m = k1\_int / 2;}
+\DoxyCodeLine{98             \}}
+\DoxyCodeLine{99             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_int \% 2 != 0) \{}
+\DoxyCodeLine{100                 m = (k1\_int -\/ 1) / 2;}
+\DoxyCodeLine{101             \}}
+\DoxyCodeLine{102         \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104         \textcolor{keywordflow}{if} (k1\_mode == \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{105             \textcolor{keywordflow}{return} G * M\_PI * t * r * (2 * pow(r, 2) + (3.0 / 8.0) * pow(t, 2));}
+\DoxyCodeLine{106         \}}
+\DoxyCodeLine{107         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{108             \textcolor{keywordflow}{return} (G * M\_PI * pow(t, 3) * pow(m, 2) / (3.0 * r)) * pow((pow(m, 2) -\/ 1), 2);}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{111             \textcolor{keywordflow}{return}  G * M\_PI * t * pow(m, 2) * (r + (3.0 * pow(t, 2) / (16.0 * r)));}
+\DoxyCodeLine{112         \}}
+\DoxyCodeLine{113         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}u"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}u"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{114             \textcolor{keywordflow}{return}  G * M\_PI * t * pow(m, 2) * (r + (pow(t, 2) / (48.0 * r)));}
+\DoxyCodeLine{115         \}}
+\DoxyCodeLine{116         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type != \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type != \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode \&\& k1\_type != k2\_type) \{}
+\DoxyCodeLine{117             \textcolor{keywordflow}{return} G * M\_PI * t * pow(m, 2) * ((pow(t, 2) / (16.0 * r)) -\/ r); }
+\DoxyCodeLine{118         \}}
+\DoxyCodeLine{119         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type != \textcolor{stringliteral}{"{}u"{}} \&\& k2\_type != \textcolor{stringliteral}{"{}u"{}} \&\& k1\_mode == k2\_mode \&\& k1\_type != k2\_type) \{}
+\DoxyCodeLine{120             \textcolor{keywordflow}{return} (G * M\_PI * pow(t, 3) * pow(m, 2) / (4.0 * r)) * (1-\/pow(m, 2));}
+\DoxyCodeLine{121         \}}
+\DoxyCodeLine{122         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type != \textcolor{stringliteral}{"{}v"{}} \&\& k2\_type != \textcolor{stringliteral}{"{}v"{}} \&\& k1\_mode == k2\_mode \&\& k1\_type != k2\_type) \{}
+\DoxyCodeLine{123             \textcolor{keywordflow}{return} (G * M\_PI * pow(t, 3) * pow(m, 2) / (12.0 * r)) * (1 -\/ pow(m, 2));}
+\DoxyCodeLine{124         \}}
+\DoxyCodeLine{125         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{126             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{127         \}}
+\DoxyCodeLine{128     \};}
+\DoxyCodeLine{129     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_linear_mode_coupling_ae514f0ac9be7ecc6ff495bd74acf763f}{ikDmu1StraightPipe}}(std::string k1, std::string k2, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} Q, \textcolor{keywordtype}{double} K, \textcolor{keywordtype}{double} G) \{}
+\DoxyCodeLine{135         k1\_type = k1.substr(k1.size() -\/ 1, k1.size());}
+\DoxyCodeLine{136         k2\_type = k2.substr(k2.size() -\/ 1, k2.size());}
+\DoxyCodeLine{137         k1\_mode = k1.substr(0, k1.size() -\/ 2);}
+\DoxyCodeLine{138         k2\_mode = k2.substr(0, k2.size() -\/ 2);}
+\DoxyCodeLine{139         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{140             k1\_int = std::stoi(k1\_mode);}
+\DoxyCodeLine{141             \textcolor{keywordflow}{if} (k1\_int \% 2 == 0) \{}
+\DoxyCodeLine{142                 m = k1\_int / 2;}
+\DoxyCodeLine{143             \}}
+\DoxyCodeLine{144             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_int \% 2 != 0) \{}
+\DoxyCodeLine{145                 m = (k1\_int -\/ 1) / 2;}
+\DoxyCodeLine{146             \}}
+\DoxyCodeLine{147         \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{150             \textcolor{keywordflow}{return} (K * M\_PI * pow(m, 4) / r) * (1 -\/ pow(m, 2));}
+\DoxyCodeLine{151         \}}
+\DoxyCodeLine{152         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}u"{}} \&\& k1\_mode == k2\_mode ) \{}
+\DoxyCodeLine{153             \textcolor{keywordflow}{return} Q * M\_PI * r * pow(m, 2) ;}
+\DoxyCodeLine{154         \}}
+\DoxyCodeLine{155         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode ) \{}
+\DoxyCodeLine{156             \textcolor{keywordflow}{return} M\_PI * pow(m, 2) * (Q * r + (K * pow(m, 2)) / r);}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{159             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161     \};}
+\DoxyCodeLine{162     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_gbt_linear_mode_coupling_a88dadecb3721197206c2de3671ab1e9f}{ikDmu2StraightPipe}}(std::string k1, std::string k2, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} r, \textcolor{keywordtype}{double} Q, \textcolor{keywordtype}{double} K, \textcolor{keywordtype}{double} G) \{}
+\DoxyCodeLine{168         k1\_type = k1.substr(k1.size() -\/ 1, k1.size());}
+\DoxyCodeLine{169         k2\_type = k2.substr(k2.size() -\/ 1, k2.size());}
+\DoxyCodeLine{170         k1\_mode = k1.substr(0, k1.size() -\/ 2);}
+\DoxyCodeLine{171         k2\_mode = k2.substr(0, k2.size() -\/ 2);}
+\DoxyCodeLine{172         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{173             k1\_int = std::stoi(k1\_mode);}
+\DoxyCodeLine{174             \textcolor{keywordflow}{if} (k1\_int \% 2 == 0) \{}
+\DoxyCodeLine{175                 m = k1\_int / 2;}
+\DoxyCodeLine{176             \}}
+\DoxyCodeLine{177             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_int \% 2 != 0) \{}
+\DoxyCodeLine{178                 m = (k1\_int -\/ 1) / 2;}
+\DoxyCodeLine{179             \}}
+\DoxyCodeLine{180         \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182         \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{183             \textcolor{keywordflow}{return} (K * M\_PI * pow(m, 4) / r) * (1 -\/ pow(m, 2));}
+\DoxyCodeLine{184         \}}
+\DoxyCodeLine{185         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}u"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{186             \textcolor{keywordflow}{return} Q * M\_PI * r * pow(m, 2);}
+\DoxyCodeLine{187         \}}
+\DoxyCodeLine{188         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_type == \textcolor{stringliteral}{"{}c"{}} \&\& k2\_type == \textcolor{stringliteral}{"{}v"{}} \&\& k1\_mode == k2\_mode) \{}
+\DoxyCodeLine{189             \textcolor{keywordflow}{return} M\_PI * pow(m, 2) * (Q * r + (K * pow(m, 2)) / r);}
+\DoxyCodeLine{190         \}}
+\DoxyCodeLine{191         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{192             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{193         \}}
+\DoxyCodeLine{194     \};}
+\DoxyCodeLine{195 \};}
+
+\end{DoxyCode}

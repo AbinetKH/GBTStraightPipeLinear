@@ -1,0 +1,76 @@
+\hypertarget{element__stiffness__matrix_8h_source}{}\doxysection{element\+\_\+stiffness\+\_\+matrix.\+h}
+\label{element__stiffness__matrix_8h_source}\index{GBT\_straight\_pipe\_linear/element\_stiffness\_matrix.h@{GBT\_straight\_pipe\_linear/element\_stiffness\_matrix.h}}
+\mbox{\hyperlink{element__stiffness__matrix_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{class_gbt_element_matrix}{GbtElementMatrix}} \{}
+\DoxyCodeLine{4 \textcolor{keyword}{private}:}
+\DoxyCodeLine{5     \textcolor{comment}{//Eigen::VectorXd loc\_k1,loc\_k2;}}
+\DoxyCodeLine{6     Eigen::Matrix4d shLTxTxshL, shHTxxTxxshH, shHTTshH, shHTxTxshH, shHTxxTshH, shHTTxxshH;}
+\DoxyCodeLine{7     Eigen::MatrixXd element\_matrix;}
+\DoxyCodeLine{8     \textcolor{keywordtype}{int} leng;}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     Eigen::MatrixXd \mbox{\hyperlink{class_gbt_element_matrix_a02dc34ea750981e04f96e2092eed82a9}{ikLinear}}(Eigen::MatrixXd ik\_tensor, \textcolor{keywordtype}{double} l,  \textcolor{keywordtype}{int} element\_dof) \{}
+\DoxyCodeLine{12         \textcolor{comment}{/*}}
+\DoxyCodeLine{13 \textcolor{comment}{        * Determines the linear element stiffness matrix,}}
+\DoxyCodeLine{14 \textcolor{comment}{        */}}
+\DoxyCodeLine{15         element\_matrix.setZero(element\_dof, element\_dof);}
+\DoxyCodeLine{16         \textcolor{comment}{/*}}
+\DoxyCodeLine{17 \textcolor{comment}{        * The following stiffness matrices are built based on the Hermite shape functions }}
+\DoxyCodeLine{18 \textcolor{comment}{        * The matrices are imported from MAPLE}}
+\DoxyCodeLine{19 \textcolor{comment}{        * The detail formulation of these metrices can be found on section 2.2.6 }}
+\DoxyCodeLine{20 \textcolor{comment}{        */}}
+\DoxyCodeLine{21         shLTxTxshL << 0.37e2 / 0.10e2 / l, -\/0.189e3 / 0.40e2 / l, 0.27e2 / 0.20e2 / l, -\/0.13e2 / 0.40e2 / l,}
+\DoxyCodeLine{22             -\/0.189e3 / 0.40e2 / l, 0.54e2 / 0.5e1 / l, -\/0.297e3 / 0.40e2 / l, 0.27e2 / 0.20e2 / l,}
+\DoxyCodeLine{23             0.27e2 / 0.20e2 / l, -\/0.297e3 / 0.40e2 / l, 0.54e2 / 0.5e1 / l, -\/0.189e3 / 0.40e2 / l,}
+\DoxyCodeLine{24             -\/0.13e2 / 0.40e2 / l, 0.27e2 / 0.20e2 / l, -\/0.189e3 / 0.40e2 / l, 0.37e2 / 0.10e2 / l;}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         shHTxxTxxshH <<}
+\DoxyCodeLine{27             12 / pow(l, 3), 6 / pow(l, 2), -\/12 / pow(l, 3), 6 / pow(l, 2),}
+\DoxyCodeLine{28             6 / pow(l, 2), 4 / l, -\/6 / pow(l, 2), 2 / l,}
+\DoxyCodeLine{29             -\/12 / pow(l, 3), -\/6 / pow(l, 2), 12 / pow(l, 3), -\/6 / pow(l, 2),}
+\DoxyCodeLine{30             6 / pow(l, 2), 2 / l, -\/6 / pow(l, 2), 4 / l;}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         shHTxTxshH <<}
+\DoxyCodeLine{33             0.6e1 / 0.5e1 / l, 0.1e1 / 0.10e2, -\/0.6e1 / 0.5e1 / l, 0.1e1 / 0.10e2,}
+\DoxyCodeLine{34             0.1e1 / 0.10e2, 0.2e1 / 0.15e2 * l, -\/0.1e1 / 0.10e2, -\/l / 30,}
+\DoxyCodeLine{35             -\/0.6e1 / 0.5e1 / l, -\/0.1e1 / 0.10e2, 0.6e1 / 0.5e1 / l, -\/0.1e1 / 0.10e2,}
+\DoxyCodeLine{36             0.1e1 / 0.10e2, -\/l / 30, -\/0.1e1 / 0.10e2, 0.2e1 / 0.15e2 * l;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         shHTTshH <<}
+\DoxyCodeLine{39             0.13e2 / 0.35e2 * l, 0.11e2 / 0.210e3 * pow(l,2), 0.9e1 / 0.70e2 * l, -\/0.13e2 / 0.420e3 * pow(l,2),}
+\DoxyCodeLine{40             0.11e2 / 0.210e3 * pow(l,2), pow(l,3) / 105, 0.13e2 / 0.420e3 * pow(l,2), -\/pow(l,3) / 140,}
+\DoxyCodeLine{41             0.9e1 / 0.70e2 * l, 0.13e2 / 0.420e3 * pow(l,2), 0.13e2 / 0.35e2 * l, -\/0.11e2 / 0.210e3 * pow(l,2),}
+\DoxyCodeLine{42             -\/0.13e2 / 0.420e3 * pow(l,2), -\/pow(l,3) / 140, -\/0.11e2 / 0.210e3 * pow(l,2), pow(l,3) / 105;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         shHTxxTshH <<}
+\DoxyCodeLine{45             -\/0.6e1 / 0.5e1 / l, -\/0.1e1 / 0.10e2, 0.6e1 / 0.5e1 / l, -\/0.1e1 / 0.10e2,}
+\DoxyCodeLine{46             -\/0.11e2 / 0.10e2, -\/0.2e1 / 0.15e2 * l, 0.1e1 / 0.10e2, l / 30,}
+\DoxyCodeLine{47             0.6e1 / 0.5e1 / l, 0.1e1 / 0.10e2, -\/0.6e1 / 0.5e1 / l, 0.1e1 / 0.10e2,}
+\DoxyCodeLine{48             -\/0.1e1 / 0.10e2, l / 30, 0.11e2 / 0.10e2, -\/0.2e1 / 0.15e2 * l;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         shHTTxxshH <<}
+\DoxyCodeLine{51             -\/0.6e1 / 0.5e1 / l, -\/0.11e2 / 0.10e2, 0.6e1 / 0.5e1 / l, -\/0.1e1 / 0.10e2,}
+\DoxyCodeLine{52             -\/0.1e1 / 0.10e2, -\/0.2e1 / 0.15e2 * l, 0.1e1 / 0.10e2, l / 30,}
+\DoxyCodeLine{53             0.6e1 / 0.5e1 / l, 0.1e1 / 0.10e2, -\/0.6e1 / 0.5e1 / l, 0.11e2 / 0.10e2,}
+\DoxyCodeLine{54             -\/0.1e1 / 0.10e2, l / 30, 0.1e1 / 0.10e2, -\/0.2e1 / 0.15e2 * l;}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         leng = ik\_tensor.rows();}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#pragma omp parallel for        }}
+\DoxyCodeLine{58         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < leng ; i++) \{}
+\DoxyCodeLine{59         \textcolor{comment}{//  loc\_k1 = ik\_tensor(i, Eigen::seq(6, 9));}}
+\DoxyCodeLine{60         \textcolor{comment}{//  loc\_k2 = ik\_tensor(i, Eigen::seq(10, 13));}}
+\DoxyCodeLine{61             \textcolor{keywordflow}{if} (ik\_tensor(i, 0) == 1 \&\& ik\_tensor(i, 1) == 1) \{}
+\DoxyCodeLine{62                 element\_matrix(ik\_tensor(i, Eigen::seq(7, 10)), ik\_tensor(i, Eigen::seq(11, 14))) += ik\_tensor(i, 2) * shLTxTxshL;}
+\DoxyCodeLine{63             \}}
+\DoxyCodeLine{64             \textcolor{keywordflow}{if} (ik\_tensor(i, 0) != 1 \&\& ik\_tensor(i, 1) != 1) \{}
+\DoxyCodeLine{65                 element\_matrix(ik\_tensor(i, Eigen::seq(7, 10)), ik\_tensor(i, Eigen::seq(11, 14))) += ik\_tensor(i, 2) * shHTxxTxxshH + ik\_tensor(i, 3) * shHTTshH + ik\_tensor(i, 4) * shHTxTxshH + ik\_tensor(i, 6) * shHTxxTshH + ik\_tensor(i, 5) * shHTTxxshH;}
+\DoxyCodeLine{66             \}}
+\DoxyCodeLine{67         \};}
+\DoxyCodeLine{68         \textcolor{keywordflow}{return} element\_matrix;}
+\DoxyCodeLine{69     \};}
+\DoxyCodeLine{70 \};}
+
+\end{DoxyCode}

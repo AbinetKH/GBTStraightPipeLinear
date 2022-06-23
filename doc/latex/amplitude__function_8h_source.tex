@@ -1,0 +1,39 @@
+\hypertarget{amplitude__function_8h_source}{}\doxysection{amplitude\+\_\+function.\+h}
+\label{amplitude__function_8h_source}\index{GBT\_straight\_pipe\_linear/amplitude\_function.h@{GBT\_straight\_pipe\_linear/amplitude\_function.h}}
+\mbox{\hyperlink{amplitude__function_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{keyword}{class }\mbox{\hyperlink{classamplitude_vx}{amplitudeVx}} \{}
+\DoxyCodeLine{3 \textcolor{keyword}{private}:}
+\DoxyCodeLine{4     Eigen::MatrixXd loc\_V, loc\_V\_x;}
+\DoxyCodeLine{5     std::string k, k\_mode;}
+\DoxyCodeLine{6     \textcolor{keywordtype}{int} length\_mode\_list, LM\_len, LM\_pos, LM\_pos1, LM\_pos2, LM\_pos3;}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     \textcolor{keywordtype}{void}  \mbox{\hyperlink{classamplitude_vx_a6697345441b77e8573c5baf2cc8a5234}{amplitude}}(std::vector<std::string> mode\_list, Eigen::VectorXd global\_displ, Eigen::MatrixXd LM\_matrix, \textcolor{keywordtype}{int} no\_beam\_elem, \textcolor{keywordtype}{int} l, Eigen::MatrixXd* V, Eigen::MatrixXd* V\_x) \{}
+\DoxyCodeLine{10         length\_mode\_list = std::size(mode\_list);}
+\DoxyCodeLine{11         loc\_V\_x.setZero(no\_beam\_elem + 1, length\_mode\_list);}
+\DoxyCodeLine{12         loc\_V.setZero(no\_beam\_elem + 1, length\_mode\_list);}
+\DoxyCodeLine{13         LM\_len = LM\_matrix.cols()-\/1;}
+\DoxyCodeLine{14 \textcolor{comment}{//\#pragma omp parallel for }}
+\DoxyCodeLine{15         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < length\_mode\_list; i++) \{}
+\DoxyCodeLine{16             k = mode\_list[i];}
+\DoxyCodeLine{17             LM\_pos = i * 4;}
+\DoxyCodeLine{18             LM\_pos1 = LM\_pos + 1;}
+\DoxyCodeLine{19             LM\_pos2 = LM\_pos + 2;}
+\DoxyCodeLine{20             LM\_pos3 = LM\_pos + 3;}
+\DoxyCodeLine{21             k\_mode = k.substr(0, k.size() -\/ 2);}
+\DoxyCodeLine{22             \textcolor{keywordflow}{if} (k\_mode == \textcolor{stringliteral}{"{}1"{}}) \{}
+\DoxyCodeLine{23                 loc\_V\_x(Eigen::all, i) = global\_displ(Eigen::seq(LM\_matrix(LM\_pos, 0), LM\_matrix(LM\_pos3, LM\_len), 3));}
+\DoxyCodeLine{24                             \}}
+\DoxyCodeLine{25             \textcolor{keywordflow}{else} \{               }
+\DoxyCodeLine{26                 loc\_V\_x(Eigen::all, i) = global\_displ(Eigen::seq(LM\_matrix(LM\_pos1, 0), LM\_matrix(LM\_pos3, LM\_len), 2));}
+\DoxyCodeLine{27                 loc\_V(Eigen::all, i) = global\_displ(Eigen::seq(LM\_matrix(LM\_pos, 0), LM\_matrix(LM\_pos2, LM\_len), 2));}
+\DoxyCodeLine{28             \}}
+\DoxyCodeLine{29         \}}
+\DoxyCodeLine{30         *V = loc\_V;}
+\DoxyCodeLine{31         *V\_x = loc\_V\_x;}
+\DoxyCodeLine{32         \}}
+\DoxyCodeLine{33     \};}
+
+\end{DoxyCode}

@@ -1,0 +1,90 @@
+\hypertarget{boundary__conditions_8h_source}{}\doxysection{boundary\+\_\+conditions.\+h}
+\label{boundary__conditions_8h_source}\index{GBT\_straight\_pipe\_linear/boundary\_conditions.h@{GBT\_straight\_pipe\_linear/boundary\_conditions.h}}
+\mbox{\hyperlink{boundary__conditions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{class_boundary_condition}{BoundaryCondition}} \{}
+\DoxyCodeLine{4 \textcolor{keyword}{private}:}
+\DoxyCodeLine{5     Eigen::VectorXd fixed\_dofs;}
+\DoxyCodeLine{6     std::string k1, k1\_mode;}
+\DoxyCodeLine{7     \textcolor{keywordtype}{int} count=0,count\_dof=0;}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     Eigen::VectorXd \mbox{\hyperlink{class_boundary_condition_ab1799192d7679003d6d3b7716f1decf1}{dofsFixed}}(std::vector<std::string> mode\_list, \textcolor{keywordtype}{int} length\_mode\_list , \textcolor{keywordtype}{int} no\_beam\_elem, std::vector<int> torsion\_dof, std::vector<int> axisymmetric\_dof, std::vector<int> extension\_dof, std::vector<int> bending\_dof, std::vector<int> allocal\_dof, Eigen::MatrixXd LM\_matrix) \{}
+\DoxyCodeLine{11         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < length\_mode\_list; i++) \{}
+\DoxyCodeLine{12             k1 = mode\_list[i];}
+\DoxyCodeLine{13             k1\_mode = k1.substr(0, k1.size() -\/ 2);}
+\DoxyCodeLine{14             \textcolor{keywordflow}{if} (k1 == \textcolor{stringliteral}{"{}t|t"{}}) \{}
+\DoxyCodeLine{15                 \textcolor{keywordflow}{if} (torsion\_dof[0] == 1) \{}
+\DoxyCodeLine{16                     count\_dof += 2;}
+\DoxyCodeLine{17                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{18                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof-\/1)) = LM\_matrix(Eigen::seq(count, count + 1), 0);}
+\DoxyCodeLine{19                 \}}
+\DoxyCodeLine{20                 \textcolor{keywordflow}{if} (torsion\_dof[1] == 1) \{}
+\DoxyCodeLine{21                     count\_dof += 2;}
+\DoxyCodeLine{22                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{23                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof -\/ 1)) = LM\_matrix(Eigen::seq(count + 2, count + 3), no\_beam\_elem -\/ 1);}
+\DoxyCodeLine{24                 \}}
+\DoxyCodeLine{25                 count += 4;}
+\DoxyCodeLine{26             \}}
+\DoxyCodeLine{27             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1 == \textcolor{stringliteral}{"{}a|a"{}}) \{}
+\DoxyCodeLine{28                 \textcolor{keywordflow}{if} (axisymmetric\_dof[0] == 1) \{}
+\DoxyCodeLine{29                     count\_dof += 2;}
+\DoxyCodeLine{30                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{31                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof-\/1)) = LM\_matrix(Eigen::seq(count, count + 1), 0);}
+\DoxyCodeLine{32                 \}}
+\DoxyCodeLine{33                 \textcolor{keywordflow}{if} (axisymmetric\_dof[1] == 1) \{}
+\DoxyCodeLine{34                     count\_dof += 2;}
+\DoxyCodeLine{35                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{36                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof-\/1)) = LM\_matrix(Eigen::seq(count + 2, count + 3), no\_beam\_elem -\/ 1);}
+\DoxyCodeLine{37                 \}}
+\DoxyCodeLine{38                 count += 4;}
+\DoxyCodeLine{39             \}}
+\DoxyCodeLine{40             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1 == \textcolor{stringliteral}{"{}1|1"{}}) \{}
+\DoxyCodeLine{41                 \textcolor{keywordflow}{if} (extension\_dof[0] == 1) \{}
+\DoxyCodeLine{42                     count\_dof += 1;}
+\DoxyCodeLine{43                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{44                     fixed\_dofs(count\_dof-\/1) = LM\_matrix(count, 0);}
+\DoxyCodeLine{45                 \}}
+\DoxyCodeLine{46                 \textcolor{keywordflow}{if} (extension\_dof[1] == 1) \{}
+\DoxyCodeLine{47                     count\_dof += 1;}
+\DoxyCodeLine{48                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{49                     fixed\_dofs(count\_dof-\/1) = LM\_matrix(count + 3, no\_beam\_elem -\/ 1);}
+\DoxyCodeLine{50                 \}}
+\DoxyCodeLine{51                 count += 4;}
+\DoxyCodeLine{52             \}}
+\DoxyCodeLine{53             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode == \textcolor{stringliteral}{"{}2"{}} || k1\_mode == \textcolor{stringliteral}{"{}3"{}}) \{}
+\DoxyCodeLine{54                 \textcolor{keywordflow}{if} (bending\_dof[0] == 1) \{}
+\DoxyCodeLine{55                     count\_dof += 2;}
+\DoxyCodeLine{56                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{57                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof -\/ 1)) = LM\_matrix(Eigen::seq(count, count + 1), 0);}
+\DoxyCodeLine{58                 \}}
+\DoxyCodeLine{59                 \textcolor{keywordflow}{if} (bending\_dof[1] == 1) \{}
+\DoxyCodeLine{60                     count\_dof += 2;}
+\DoxyCodeLine{61                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{62                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof -\/ 1)) = LM\_matrix(Eigen::seq(count + 2, count + 3), no\_beam\_elem -\/ 1);}
+\DoxyCodeLine{63                 \}}
+\DoxyCodeLine{64                 count += 4;}
+\DoxyCodeLine{65             \}}
+\DoxyCodeLine{66             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (k1\_mode != \textcolor{stringliteral}{"{}t"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}a"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}1"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}2"{}} \&\& k1\_mode != \textcolor{stringliteral}{"{}3"{}}) \{}
+\DoxyCodeLine{67                 \textcolor{keywordflow}{if} (allocal\_dof[0] == 1) \{}
+\DoxyCodeLine{68                     count\_dof += 2;}
+\DoxyCodeLine{69                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{70                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof -\/ 1)) = LM\_matrix(Eigen::seq(count, count + 1), 0);}
+\DoxyCodeLine{71                 \}}
+\DoxyCodeLine{72                 \textcolor{keywordflow}{if} (allocal\_dof[1] == 1) \{}
+\DoxyCodeLine{73                     count\_dof += 2;}
+\DoxyCodeLine{74                     fixed\_dofs.conservativeResize(count\_dof);}
+\DoxyCodeLine{75                     fixed\_dofs(Eigen::seq(count\_dof -\/ 2, count\_dof -\/ 1)) = LM\_matrix(Eigen::seq(count + 2, count + 3), no\_beam\_elem -\/ 1);}
+\DoxyCodeLine{76                 \}}
+\DoxyCodeLine{77                 count += 4;}
+\DoxyCodeLine{78             \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81         \textcolor{keywordflow}{return} fixed\_dofs;}
+\DoxyCodeLine{82     \}}
+\DoxyCodeLine{83 \};}
+\DoxyCodeLine{84 }
+
+\end{DoxyCode}
