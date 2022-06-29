@@ -38,5 +38,5 @@ target_include_directories(GBTStraightPipeLinear PRIVATE ${SOURCE_DIR})
 #===================== LINKING LIBRARIES =======================#
 
 find_package(matplot++ REQUIRED)
-target_link_libraries(GBTStraightPipeLinear PRIVATE Matplot++::cimg std::filesystem Matplot++::matplot Matplot++::nodesoup)
+target_link_libraries(GBTStraightPipeLinear  PRIVATE Matplot++::cimg std::filesystem Matplot++::matplot Matplot++::nodesoup)
 

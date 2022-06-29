@@ -20,8 +20,11 @@
 #include <matplot/matplot.h>
 #include "gnuplot-iostream.h"
 
-int main(int argc, char* argv[])
+
+int main()
 {
+	std::string again="yes";
+	do {
 	/**
 	* Preprocessing
 	* Input parameters
@@ -44,23 +47,24 @@ int main(int argc, char* argv[])
 	 };*/
 
 	std::cout << "FEM_GBT_linear is a C++ code developed for stress and deformation analysis of straight thin-walled circular pipes based on the Generalized Beam Theory(GBT). \n" << std::endl;
-	std::cout << "Specify the following parameters. \n" << std::endl;
-	std::cout << "Number of Cross-sectional refinement [default = 81]: \n ";
-	if (std::cin.peek() == '\n') { //check if next character is newline
-		cross_sect_ref = 20; //and assign the default
-	}
-	else if (!(std::cin >> cross_sect_ref)) { //be sure to handle invalid input
-		std::cout << "Invalid input.\n";
-		//error handling
-	}
-	std::cout << "Number of beam elements [default = 25]:  \n";
-	if (std::cin.peek() == '\n') { }
-	std::cout << "Pipe radius [default = 500]:  \n";
-	if (std::cin.peek() == '\n') { }
-	std::cout << "Pipe Thickness [default = 10]:  \n";
-	if (std::cin.peek() == '\n') { }
+	
+	std::cout << "Specify the following parameters or enter to use the values: \n" << std::endl;
+    std::cout << "Use consistent unit: ton, mm, s, N, MPa \n" << std::endl;
+	std::cout << " Number of cross-sectional refinement [default = 81], \n Number of beam elements [default = 25], \n Pipe length [default = 1000], \n Pipe radius [default = 500], " <<
+		" \n Pipe thickness [default = 10], \n Elastic modulus [default = 205000], \n Poisson's ratio [default = 0.3], \n Projected area load  [default = 1 N/mm2], \n Plot scale  [default = 50], \n";
+	if (std::cin.peek() == '\n') { 
 
-	std::vector<std::string> mode_list = { "a|a","1|1", "3|c", "3|v", "3|u", "5|c", "5|v", "5|u", "7|c", "7|v", "7|u" };/*, "9|c", "9|v", "9|u" , "10|c", "10|v", "10|u", "11|c", "11|v", "11|u",
+	}
+	else if (!(std::cin >> cross_sect_ref >> no_beam_elem >> length >> r >> t >> E >> mu >> q >> plot_scale)) {
+		while (!(std::cin >> cross_sect_ref >> no_beam_elem >> length >> r >> t >> E >> mu >> q >> plot_scale)) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+			std::cout << "Oops, the input parameter is invalid. Please try again from the beginning.\n" << std::endl;
+		}
+	}
+
+
+	std::vector<std::string> mode_list = { "a|a","1|1", "3|c", "3|v", "3|u", "5|c", "5|v", "5|u", "7|c", "7|v", "7|u" , "9|c", "9|v", "9|u" , "10|c", "10|v", "10|u"};/*, "11|c", "11|v", "11|u",
 	"12|c", "12|v", "12|u","13|c", "13|v", "13|u","14|c", "14|v", "14|u","15|c", "15|v", "15|u","16|c", "16|v", "16|u","17|c", "17|v", "17|u",
  };*/
 	int length_mode_list = std::size(mode_list);
@@ -162,18 +166,8 @@ int main(int argc, char* argv[])
 	}
 	/**
 	* Solver
-	* solve for the displacemnts
+	* solve for the displacements
 	*/
-	auto end1 = std::chrono::high_resolution_clock::now();
-	// Calculating total time taken by the program
-	double time_taken1 =
-		std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - start).count();
-
-	time_taken1 *= 1e-9;
-	std::cout << "Time taken by program is : " << std::fixed
-		<< time_taken1 << std::setprecision(9);
-	std::cout << " sec" << std::endl;
-
 
 	Eigen::VectorXd global_displ(total_dof);
 
@@ -214,19 +208,6 @@ int main(int argc, char* argv[])
 	* displacement
 	*/
 
-
-	auto end2 = std::chrono::high_resolution_clock::now();
-	// Calculating total time taken by the program
-	double time_taken2 =
-		std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - start).count();
-
-	time_taken2 *= 1e-9;
-	std::cout << "Time taken by program is : " << std::fixed
-		<< time_taken2 << std::setprecision(9);
-	std::cout << " sec" << std::endl;
-
-
-
 	int nrow = X_disp.rows();
 	int ncol = X_disp.cols();
 
@@ -243,7 +224,7 @@ int main(int argc, char* argv[])
 		}
 
 	}
-	std::cout << "X \n " << X_data[nrow - 1][ncol - 1] << std::endl;
+	//std::cout << "X \n " << X_data[nrow - 1][ncol - 1] << std::endl;
 
 	auto end = std::chrono::high_resolution_clock::now();
 	// Calculating total time taken by the program
@@ -254,31 +235,16 @@ int main(int argc, char* argv[])
 	std::cout << "Time taken by program is : " << std::fixed
 		<< time_taken << std::setprecision(9);
 	std::cout << " sec" << std::endl;
-	// change to openGL
+
 	matplot::surf(Y_data, Z_data, X_data)->face_alpha(0.5).edge_color("none");
 	matplot::show();
-
-	//typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> RowMatrixXd;
-	//Eigen::MatrixXd::Map(&vec[0][0], nrow, ncol) = X_disp;
-
-
 	/*
-	//std::pair<std::vector<std::vector<double>>, matplot::vector_2d> X = matplot::meshgrid(matplot::iota(-5, 0.5, 5));
-	//std::pair<std::vector<std::vector<double>>, matplot::vector_2d> Y = matplot::meshgrid(matplot::iota(-5, 0.5, 5));
-	auto [X, Y] = matplot::meshgrid(matplot::iota(-5, 0.5, 5));
-
-	//std::cout << "X \n " << X << std::endl;
-	auto Z = matplot::transform(X, Y, [](double x, double y) { return y * sin(x) - x * cos(y); });
-	//auto C = matplot::transform(X, Y, [](double x, double y) { return x * y; });
-
-	matplot::surf(X, Y, Z)->face_alpha(0.5).edge_color("none");
-
-	//matplot::vector_2d ;
-	//printf("%", X);
-	//std::cout<< "X \n " << X << std::endl;
-	std::cout << X.size() << std::endl;
-	//std::cout << Y << std::endl;
-	//std::cout << Z << std::endl;
-	matplot::show();*/
-
+    std::cout << "Do you want to run again (yes or n):" << std::endl;
+	std::cin.ignore();
+	std::cin.getline(again,256);
+	std::cout << again << std::endl;
+*/  
+	} while (again == "yes"); 
 }
+
+
