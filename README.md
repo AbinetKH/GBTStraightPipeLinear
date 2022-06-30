@@ -11,15 +11,15 @@ The numerical example is developed to validate and illustrate the application an
 
 
 
-#### The generalized modal amplitude vector
+### The generalized modal amplitude vector
 ![The generalized modal amplitude vector](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/dispVector.png)
 
-#### Force vector
+### Force vector
 ![Force vector](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/externalForceVector.png)
 
-#### Element stiffness matrix
+### Element stiffness matrix
 ![Element stiffness matrix](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/stiffnessmatrix.png)
 
-#### Deformation shape of a short cantilever pipe
+### Deformation shape of a short cantilever pipe
 ![Deformation shape of a short cantilever pipe](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/plot.png)
 
