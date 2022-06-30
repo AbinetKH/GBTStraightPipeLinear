@@ -235,7 +235,7 @@ int main()
 	std::cout << "Time taken by program is : " << std::fixed
 		<< time_taken << std::setprecision(9);
 	std::cout << " sec" << std::endl;
-
+	
 	matplot::surf(Y_data, Z_data, X_data)->face_alpha(0.5).edge_color("none");
 	matplot::show();
 	/*
