@@ -33,9 +33,6 @@
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\loading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\mainwindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>

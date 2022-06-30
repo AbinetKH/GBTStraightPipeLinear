@@ -1,0 +1,56 @@
+\hypertarget{_g_b_t__straight__pipe__linear_2_g_b_t__straight__pipe__linear_2main_8cpp}{}\doxysection{C\+:/\+Users/dine1308/source/repos/\+GBT\+\_\+straight\+\_\+pipe\+\_\+linear/\+GBT\+\_\+straight\+\_\+pipe\+\_\+linear/main.cpp File Reference}
+\label{_g_b_t__straight__pipe__linear_2_g_b_t__straight__pipe__linear_2main_8cpp}\index{C:/Users/dine1308/source/repos/GBT\_straight\_pipe\_linear/GBT\_straight\_pipe\_linear/main.cpp@{C:/Users/dine1308/source/repos/GBT\_straight\_pipe\_linear/GBT\_straight\_pipe\_linear/main.cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$omp.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include \char`\"{}mesh.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}LM\+\_\+connectivity\+\_\+matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ik\+\_\+tensor.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}element\+\_\+stiffness\+\_\+matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}boundary\+\_\+conditions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}loading.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}amplitude\+\_\+function.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}displacements.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$matplot/matplot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gnuplot-\/iostream.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_g_b_t__straight__pipe__linear_2_g_b_t__straight__pipe__linear_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_g_b_t__straight__pipe__linear_2_g_b_t__straight__pipe__linear_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{_g_b_t__straight__pipe__linear_2_g_b_t__straight__pipe__linear_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Preprocessing Input parameters r(pipe radius), length(total length of the pipe), t(wall thickness of the pipe), E(modules of elasticity), K(plate bending stiffness),Q(plate extensional stiffness),q(area load) G(shear modules), no\+\_\+beam\+\_\+elem(number of beam elements),l(element length) cross\+\_\+sect\+\_\+ref( number of discretization in the cross-\/section, only for plotting purpose), Boundary conditions (torsion, axisymmetric, extension, bending, local dofs) at the two end of the pipe 1= fixed and 0=free Initialize vector of GBT mode list
+
+mesh generator
+
+initialize LM connectivity matrix for assembly of the global stiffness matrix
+
+initialize GBT mode second-\/order coupling tensor
+
+build the element stiffness matrix
+
+assembel the global stiffness matrix
+
+apply the boundary conditions
+
+determine the external load conditions this code is only for projected area load to do\+: add general type of loading
+
+Solver solve for the displacemnts
+
+postprocessing organize the generalized modal amplitude vector
+
+calculation of displacements by combining the amplitude coefficients coordinate transfer
+
+Plot displacement

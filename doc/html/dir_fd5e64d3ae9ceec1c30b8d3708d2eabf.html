@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GBT Linear: GBT_straight_pipe_linear/main.cpp File Reference</title>
+<title>GBT Linear: build Directory Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="New Bitmap Image.bmp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="icon.bmp"/></td>
   <td id="projectalign">
    <div id="projectname">GBT Linear<span id="projectnumber">&#160;v1.0</span>
    </div>
@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('dir_fd5e64d3ae9ceec1c30b8d3708d2eabf.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -93,70 +93,21 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
+  <div class="headertitle"><div class="title">build Directory Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;Eigen/Dense&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;omp.h&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;chrono&gt;</code><br />
-<code>#include &lt;iomanip&gt;</code><br />
-<code>#include &quot;<a class="el" href="mesh_8h_source.html">mesh.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_l_m__connectivity__matrix_8h_source.html">LM_connectivity_matrix.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ik__tensor_8h_source.html">ik_tensor.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="element__stiffness__matrix_8h_source.html">element_stiffness_matrix.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="loading_8h_source.html">loading.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="amplitude__function_8h_source.html">amplitude_function.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="displacements_8h_source.html">displacements.h</a>&quot;</code><br />
-<code>#include &lt;matplot/matplot.h&gt;</code><br />
-<code>#include &quot;gnuplot-iostream.h&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="subdirs" name="subdirs"></a>
+Directories</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_3eaf2230b46361d0c50e5281492c2595.html">CMakeFiles</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4" name="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Preprocessing Input parameters r(pipe radius), length(total length of the pipe), t(wall thickness of the pipe), E(modules of elasticity), K(plate bending stiffness),Q(plate extensional stiffness),q(area load) G(shear modules), no_beam_elem(number of beam elements),l(element length) cross_sect_ref( number of discretization in the cross-section, only for plotting purpose), Boundary conditions (torsion, axisymmetric, extension, bending, local dofs) at the two end of the pipe 1= fixed and 0=free Initialize vector of GBT mode list</p>
-<p >mesh generator</p>
-<p >initialize LM connectivity matrix for assembly of the global stiffness matrix</p>
-<p >initialize GBT mode second-order coupling tensor</p>
-<p >build the element stiffness matrix</p>
-<p >assembel the global stiffness matrix</p>
-<p >apply the boundary conditions</p>
-<p >determine the external load conditions this code is only for projected area load to do: add general type of loading</p>
-<p >Solver solve for the displacemnts</p>
-<p >postprocessing organize the generalized modal amplitude vector</p>
-<p >calculation of displacements by combining the amplitude coefficients coordinate transfer</p>
-<p >Plot displacement</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e09163f3d70dffaf17cfa79b4faec22d.html">GBT_straight_pipe_linear</a></li><li class="navelem"><a class="el" href="main_8cpp.html">main.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_fd5e64d3ae9ceec1c30b8d3708d2eabf.html">build</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>

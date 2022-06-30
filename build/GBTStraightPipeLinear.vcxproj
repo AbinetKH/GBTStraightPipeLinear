@@ -383,7 +383,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\gnuplot-iostream.h" />
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\ik_tensor.h" />
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\loading.h" />
-    <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\mainwindow.h" />
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\mesh.h" />
     <ClInclude Include="C:\Users\dine1308\source\repos\GBTLinearPipe\include\mode_coupling_ik.h" />
     <ClCompile Include="C:\Users\dine1308\source\repos\GBTLinearPipe\src\main.cpp" />

@@ -9,5 +9,6 @@ var annotated_dup =
     [ "GbtLinearModeCoupling", "class_gbt_linear_mode_coupling.html", "class_gbt_linear_mode_coupling" ],
     [ "GbtLoading", "class_gbt_loading.html", "class_gbt_loading" ],
     [ "LmConnectivityMatrix", "class_lm_connectivity_matrix.html", "class_lm_connectivity_matrix" ],
+    [ "MainWindow", "class_main_window.html", "class_main_window" ],
     [ "RectangularMesh", "class_rectangular_mesh.html", "class_rectangular_mesh" ]
 ];

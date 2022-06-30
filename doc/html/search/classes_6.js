@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rectangularmesh_0',['RectangularMesh',['../class_rectangular_mesh.html',1,'']]]
+  ['mainwindow_0',['MainWindow',['../class_main_window.html',1,'']]]
 ];
