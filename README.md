@@ -8,8 +8,8 @@ GBTStraightPipeLinear is a C++ code currently under development for stress and d
 The numerical example is developed to validate and illustrate the application and capabilities of the linear GBT formulation and its numerical implementation. Here, a short cantilever pipe is considered as a numerical example with the physical properties and boundary conditions shown below.
 
 ![example](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/example.png)
-#### Deformation shape of a short cantilever pipe
-![Deformation shape of a short cantilever pipe](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/plot.png)
+
+
 
 #### The generalized modal amplitude vector
 ![The generalized modal amplitude vector](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/dispVector.png)
@@ -19,3 +19,7 @@ The numerical example is developed to validate and illustrate the application an
 
 #### Element stiffness matrix
 ![Element stiffness matrix](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/stiffnessmatrix.png)
+
+#### Deformation shape of a short cantilever pipe
+![Deformation shape of a short cantilever pipe](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/plot.png)
+
