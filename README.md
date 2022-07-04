@@ -16,9 +16,20 @@ We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you 
  * Libraries: Eigen, OpenMP, matplot++ and gnuplot
 
 ## Code structure
- * main.cpp ->
-
-
+ src\
+ * main.cpp -> preprocessing, solver and postprocessing
+ include\	
+ * amplitude_function.h	
+ * boundary_conditions.h	
+ * displacements.h	
+ * element_stiffness_matrix.h
+ * GBT_function.h	
+ * ik_tensor.h	
+ * LM_connectivity_matrix.h	
+ * loading.h	
+ * mainwindow.h	
+ * mesh.h
+ * mode_coupling_ik.h	
 
 ## Numerical Example
 The numerical example is developed to validate and illustrate the application and capabilities of the linear GBT formulation and its numerical implementation. Here, a short cantilever pipe is considered as a numerical example with the physical properties and boundary conditions shown below.
