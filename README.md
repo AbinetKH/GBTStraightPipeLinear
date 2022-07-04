@@ -59,7 +59,8 @@ Citation
 --------
 
 If you use any of the GBTStraightPipeLinear packages to produce scientific articles, please cite:
-'''
+
+'''latex
 @phdthesis{Habtemariam2022,
   author      = {Abinet Kifle Habtemariam},
   title       = {Generalized Beam Theory for the analysis of thin-walled circular pipe members},
