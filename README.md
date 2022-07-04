@@ -18,6 +18,7 @@ We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you 
 ## Code structure
  src\
  * main.cpp -> preprocessing, solver and postprocessing
+ 
  include\	
  * amplitude_function.h	
  * boundary_conditions.h	
