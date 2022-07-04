@@ -15,6 +15,10 @@ We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you 
  * C++ 20
  * Libraries: Eigen, OpenMP, matplot++ and gnuplot
 
+## Code structure
+ * main.cpp ->
+
+
 
 ## Numerical Example
 The numerical example is developed to validate and illustrate the application and capabilities of the linear GBT formulation and its numerical implementation. Here, a short cantilever pipe is considered as a numerical example with the physical properties and boundary conditions shown below.
