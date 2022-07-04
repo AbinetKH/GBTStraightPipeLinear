@@ -55,3 +55,27 @@ The numerical example is developed to validate and illustrate the application an
 ### Deformation shape of a short cantilever pipe
 ![Deformation shape of a short cantilever pipe](https://github.com/AbinetKH/GBTStraightPipeLinear/blob/master/doc/plot.png)
 
+Citation
+--------
+
+If you use any of the CurvedGBT packages to produce scientific articles, please cite our papers presenting linear `static <https://doi.org/10.1016/j.tws.2020.107243>`_ and `dynamic <https://doi.org/10.1016/j.tws.2021.107628>`_ GBT formulations::
+
+ @article{abinet2020curved,
+ title = {{Generalized Beam Theory} formulation for thin-walled pipes with circular axis},
+ journal = {Thin-Walled Structures},
+ volume = {159},
+ pages = {107243},
+ year = {2021},
+ doi = {https://doi.org/10.1016/j.tws.2020.107243},
+ author = {Abinet K. Habtemariam and Carsten Könke and Volkmar Zabel and Marcelo J. Bianco}
+ }
+ @article{abinet2020vibration,
+ title = {Vibration analysis of thin-walled pipes with circular axis using the {Generalized Beam Theory}},
+ journal = {Thin-Walled Structures},
+ volume = {163},
+ pages = {107628},
+ year = {2021},
+ doi = {https://doi.org/10.1016/j.tws.2021.107628},
+ author = {Abinet K. Habtemariam and Fabiola Tartaglione and Volkmar Zabel and Carsten Könke and Marcelo J. Bianco}
+ }
+ 
