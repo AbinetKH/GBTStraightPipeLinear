@@ -11,6 +11,13 @@ GBTStraightPipeLinear is a C++ code currently under development for stress and d
 We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you run the program, please update the path of the vcpkg.cmake file in the CMakeLists.txt.
 
 
+## Dependencies
+
+       ** A working Python installation, Version 3.6 or newer
+       ** NumPy, SciPy, Sympy, pandas, Matplotlib
+
+
+
 ## Numerical Example
 The numerical example is developed to validate and illustrate the application and capabilities of the linear GBT formulation and its numerical implementation. Here, a short cantilever pipe is considered as a numerical example with the physical properties and boundary conditions shown below.
 
