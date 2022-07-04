@@ -58,4 +58,4 @@ The numerical example is developed to validate and illustrate the application an
 Citation
 --------
 
-If you use any of the GBTStraightPipeLinear packages to produce scientific articles, please cite:https://e-pub.uni-weimar.de/opus4/frontdoor/index/index/docId/4572
+If you use any of the GBTStraightPipeLinear packages to produce scientific articles, please cite: https://e-pub.uni-weimar.de/opus4/frontdoor/index/index/docId/4572
