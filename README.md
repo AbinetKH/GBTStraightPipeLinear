@@ -13,8 +13,8 @@ We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you 
 
 ## Dependencies
 
-       * A working Python installation, Version 3.6 or newer
-       * NumPy, SciPy, Sympy, pandas, Matplotlib
+       *A working Python installation, Version 3.6 or newer
+       *NumPy, SciPy, Sympy, pandas, Matplotlib
 
 
 
