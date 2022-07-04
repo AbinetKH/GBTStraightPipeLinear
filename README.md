@@ -58,17 +58,4 @@ The numerical example is developed to validate and illustrate the application an
 Citation
 --------
 
-If you use any of the GBTStraightPipeLinear packages to produce scientific articles, please cite:
-
-'''java
-@phdthesis{Habtemariam2022,
-  author      = {Abinet Kifle Habtemariam},
-  title       = {Generalized Beam Theory for the analysis of thin-walled circular pipe members},
-  type        = {doctoralthesis},
-  pages       = {188},
-  school      = {Bauhaus-Universit{\"a}t Weimar},
-  doi       = {10.25643/bauhaus-universitaet.4572},
-  year        = {2022},
-}
-'''
- 
+If you use any of the GBTStraightPipeLinear packages to produce scientific articles, please cite:https://e-pub.uni-weimar.de/opus4/frontdoor/index/index/docId/4572
