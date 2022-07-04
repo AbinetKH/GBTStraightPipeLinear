@@ -19,15 +19,19 @@ We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you 
  src\
  * main.cpp -> preprocessing, solver and postprocessing
  
- include\	
+ include\
+ 
  preprocessing headers 
+ 
  * boundary_conditions.h	
  * LM_connectivity_matrix.h
  * ik_tensor.h
  * mode_coupling_ik.h	
  * element_stiffness_matrix.h
  * loading.h	
- postprocessing headers 
+ 
+ postprocessing headers
+ 
  * GBT_function.h	
  * amplitude_function.h	
  * displacements.h	
