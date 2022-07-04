@@ -20,18 +20,18 @@ We recomend to use Visual Studio IDE and vcpkg C++ library manager.  Before you 
  * main.cpp -> preprocessing, solver and postprocessing
  
  include\	
- * amplitude_function.h	
+ preprocessing headers 
  * boundary_conditions.h	
- * displacements.h	
- * element_stiffness_matrix.h
- * GBT_function.h	
- * ik_tensor.h	
- * LM_connectivity_matrix.h	
- * loading.h	
- * mainwindow.h	
- * mesh.h
+ * LM_connectivity_matrix.h
+ * ik_tensor.h
  * mode_coupling_ik.h	
-
+ * element_stiffness_matrix.h
+ * loading.h	
+ postprocessing headers 
+ * GBT_function.h	
+ * amplitude_function.h	
+ * displacements.h	
+ * mesh.h
 ## Numerical Example
 The numerical example is developed to validate and illustrate the application and capabilities of the linear GBT formulation and its numerical implementation. Here, a short cantilever pipe is considered as a numerical example with the physical properties and boundary conditions shown below.
 
