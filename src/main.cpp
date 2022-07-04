@@ -36,15 +36,7 @@ int main()
 	*/
 	int cross_sect_ref = 81, no_beam_elem = 25;
 	double r = 500, length = 1000, pi = 3.14159, t = 10, E = 205000, mu = 0.3, q = 1, plot_scale = 50;
-	double K = (E * pow(t, 3)) / (12 * (1 - pow(mu, 2)));
-	double Q = (E * t) / (1 - pow(mu, 2));
-	double G = E / (2 * (1 + mu));
-	double l = length / no_beam_elem;
-	std::vector<int> torsion_dof = { 1,0 }, axisymmetric_dof = { 1,0 }, extension_dof = { 1,0 }, bending_dof = { 1,0 }, allocal_dof = { 1,0 };
-	/*std::vector<std::string> mode_list = { "t|t" , "a|a", "1|1", "2|c", "2|v", "2|u", "3|c", "3|v", "3|u", "4|c", "4|v", "4|u", "5|c", "5|v", "5|u" ,
-		"6|c", "6|v", "6|u", "7|c", "7|v", "7|u", "8|c", "8|v", "8|u", "9|c", "9|v", "9|u"};, "10|c", "10|v", "10|u", "11|c", "11|v", "11|u",
-		"12|c", "12|v", "12|u","13|c", "13|v", "13|u","14|c", "14|v", "14|u","15|c", "15|v", "15|u","16|c", "16|v", "16|u","17|c", "17|v", "17|u",
-	 };*/
+
 
 	std::cout << "FEM_GBT_linear is a C++ code developed for stress and deformation analysis of straight thin-walled circular pipes based on the Generalized Beam Theory(GBT). \n" << std::endl;
 	
@@ -63,7 +55,15 @@ int main()
 		}
 	}
 
-
+	double K = (E * pow(t, 3)) / (12 * (1 - pow(mu, 2)));
+	double Q = (E * t) / (1 - pow(mu, 2));
+	double G = E / (2 * (1 + mu));
+	double l = length / no_beam_elem;
+	std::vector<int> torsion_dof = { 1,0 }, axisymmetric_dof = { 1,0 }, extension_dof = { 1,0 }, bending_dof = { 1,0 }, allocal_dof = { 1,0 };
+	/*std::vector<std::string> mode_list = { "t|t" , "a|a", "1|1", "2|c", "2|v", "2|u", "3|c", "3|v", "3|u", "4|c", "4|v", "4|u", "5|c", "5|v", "5|u" ,
+		"6|c", "6|v", "6|u", "7|c", "7|v", "7|u", "8|c", "8|v", "8|u", "9|c", "9|v", "9|u"};, "10|c", "10|v", "10|u", "11|c", "11|v", "11|u",
+		"12|c", "12|v", "12|u","13|c", "13|v", "13|u","14|c", "14|v", "14|u","15|c", "15|v", "15|u","16|c", "16|v", "16|u","17|c", "17|v", "17|u",
+	 };*/
 	std::vector<std::string> mode_list = { "a|a","1|1", "3|c", "3|v", "3|u", "5|c", "5|v", "5|u", "7|c", "7|v", "7|u" , "9|c", "9|v", "9|u" , "10|c", "10|v", "10|u"};/*, "11|c", "11|v", "11|u",
 	"12|c", "12|v", "12|u","13|c", "13|v", "13|u","14|c", "14|v", "14|u","15|c", "15|v", "15|u","16|c", "16|v", "16|u","17|c", "17|v", "17|u",
  };*/
